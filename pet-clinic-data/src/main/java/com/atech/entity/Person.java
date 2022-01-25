@@ -1,8 +1,5 @@
 package com.atech.entity;
 
-import javax.persistence.Entity;
-
-@Entity
 public class Person {
 
     private String firstName;
