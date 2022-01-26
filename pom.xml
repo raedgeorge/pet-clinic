@@ -14,8 +14,9 @@
     </parent>
     <groupId>com.atech</groupId>
     <artifactId>pet-clinic</artifactId>
-    <version>1.0</version>
+    <version>0.0.1-SNAPSHOT</version>
     <name>pet-clinic</name>
+
     <description>pet-clinic</description>
     <properties>
         <java.version>17</java.version>
@@ -46,6 +47,6 @@
     </build>
         <scm>
             <developerConnection>scm:git:https://github.com/raedgeorge/pet-clinic.git</developerConnection>
-          <tag>pet-clinic-1.0</tag>
+          <tag>HEAD</tag>
   </scm>
 </project>
