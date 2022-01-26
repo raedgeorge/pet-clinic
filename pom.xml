@@ -47,6 +47,6 @@
     </build>
         <scm>
             <developerConnection>scm:git:git@github.com:raedgeorge/pet-clinic.git</developerConnection>
-          <tag>pet-clinic-0.0.1</tag>
+          <tag>HEAD</tag>
   </scm>
 </project>
