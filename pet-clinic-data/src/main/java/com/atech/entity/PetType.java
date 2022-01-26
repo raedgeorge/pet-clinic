@@ -1,6 +1,6 @@
 package com.atech.entity;
 
-public class PetType {
+public class PetType extends BaseEntity {
 
     private String name;
 
