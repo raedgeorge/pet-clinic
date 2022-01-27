@@ -1,11 +1,11 @@
 package com.atech.service.map;
 
 import com.atech.entity.Pet;
-import com.atech.service.CrudService;
+import com.atech.service.PetService;
 
 import java.util.List;
 
-public class PetServiceMap extends AbstractMapService<Pet, Integer> implements CrudService<Pet, Integer> {
+public class PetServiceMap extends AbstractMapService<Pet, Integer> implements PetService {
 
     @Override
     public List<Pet> findAll() {

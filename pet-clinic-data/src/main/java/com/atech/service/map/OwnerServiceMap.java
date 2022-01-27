@@ -1,11 +1,11 @@
 package com.atech.service.map;
 
 import com.atech.entity.Owner;
-import com.atech.service.CrudService;
+import com.atech.service.OwnerService;
 
 import java.util.List;
 
-public class OwnerServiceMap extends AbstractMapService<Owner, Integer> implements CrudService<Owner, Integer> {
+public class OwnerServiceMap extends AbstractMapService<Owner, Integer> implements OwnerService {
 
     @Override
     public List<Owner> findAll() {
@@ -30,5 +30,10 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Integer> implemen
     @Override
     public Owner findById(Integer id) {
         return super.findById(id);
+    }
+
+    @Override
+    public Owner findByLastName(String lastName) {
+        return null;
     }
 }
