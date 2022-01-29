@@ -4,8 +4,7 @@ import com.atech.entity.Owner;
 import com.atech.entity.Vet;
 import com.atech.service.OwnerService;
 import com.atech.service.VetService;
-import com.atech.service.map.OwnerServiceMap;
-import com.atech.service.map.VetServiceMap;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -15,10 +14,10 @@ public class DataLoader implements CommandLineRunner {
     private final VetService vetService;
     private final OwnerService ownerService;
 
-    public DataLoader() {
-        vetService = new VetServiceMap();
-        ownerService = new OwnerServiceMap();
-
+    @Autowired
+    public DataLoader(VetService vetService, OwnerService ownerService) {
+        this.vetService = vetService;
+        this.ownerService = ownerService;
     }
 
     @Override

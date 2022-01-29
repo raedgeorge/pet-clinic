@@ -2,9 +2,11 @@ package com.atech.service.map;
 
 import com.atech.entity.Vet;
 import com.atech.service.VetService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class VetServiceMap extends AbstractMapService<Vet, Integer> implements VetService {
 
     @Override
