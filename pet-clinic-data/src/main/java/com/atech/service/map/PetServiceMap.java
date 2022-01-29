@@ -7,30 +7,31 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class PetServiceMap extends AbstractMapService<Pet, Integer> implements PetService {
+public class PetServiceMap extends AbstractMapService<Pet, Long> implements PetService {
+
 
     @Override
     public List<Pet> findAll() {
-        return super.findAll();
+        return null;
     }
 
     @Override
     public void delete(Pet object) {
-        super.delete(object);
+
     }
 
     @Override
-    public void deleteById(Integer id) {
-        super.deleteById(id);
+    public void deleteById(Long id) {
+
     }
 
     @Override
     public Pet save(Pet object) {
-        return super.save(object, object.getId().intValue());
+        return null;
     }
 
     @Override
-    public Pet findById(Integer id) {
-        return super.findById(id);
+    public Pet findById(Long id) {
+        return null;
     }
 }

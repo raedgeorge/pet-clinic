@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class OwnerServiceMap extends AbstractMapService<Owner, Integer> implements OwnerService {
+public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService {
 
     @Override
     public List<Owner> findAll() {
@@ -20,17 +20,17 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Integer> implemen
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(Long id) {
         super.deleteById(id);
     }
 
     @Override
     public Owner save(Owner object) {
-        return super.save(object, object.getId().intValue());
+        return super.save(object);
     }
 
     @Override
-    public Owner findById(Integer id) {
+    public Owner findById(Long id) {
         return super.findById(id);
     }
 

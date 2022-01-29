@@ -2,6 +2,6 @@ package com.atech.service;
 
 import com.atech.entity.Vet;
 
-public interface VetService extends CrudService<Vet, Integer> {
+public interface VetService extends CrudService<Vet, Long> {
 
 }

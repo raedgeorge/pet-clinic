@@ -21,6 +21,7 @@ public class VetController {
     public String getVetsList(Model model){
 
         model.addAttribute("vets", vetService.findAll());
+        vetService.findAll().forEach(vet -> System.out.println(vet));
 
         return "vets/index";
     }

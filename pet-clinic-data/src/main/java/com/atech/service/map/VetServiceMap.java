@@ -7,7 +7,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class VetServiceMap extends AbstractMapService<Vet, Integer> implements VetService {
+public class VetServiceMap extends AbstractMapService<Vet, Long> implements VetService {
+
 
     @Override
     public List<Vet> findAll() {
@@ -20,17 +21,17 @@ public class VetServiceMap extends AbstractMapService<Vet, Integer> implements V
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(Long id) {
         super.deleteById(id);
     }
 
     @Override
     public Vet save(Vet object) {
-        return super.save(object, object.getId().intValue());
+        return super.save(object);
     }
 
     @Override
-    public Vet findById(Integer id) {
+    public Vet findById(Long id) {
         return super.findById(id);
     }
 }

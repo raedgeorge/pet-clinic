@@ -2,7 +2,7 @@ package com.atech.service;
 
 import com.atech.entity.Pet;
 
-public interface PetService extends CrudService<Pet, Integer> {
+public interface PetService extends CrudService<Pet, Long> {
 
 
 }

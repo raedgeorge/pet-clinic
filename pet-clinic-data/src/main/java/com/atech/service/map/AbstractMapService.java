@@ -1,13 +1,12 @@
 package com.atech.service.map;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.atech.entity.BaseEntity;
 
-public abstract class AbstractMapService<T, ID> {
+import java.util.*;
 
-    protected Map<ID, T> map = new HashMap<>();
+public abstract class AbstractMapService<T extends BaseEntity, ID extends Long> {
+
+    protected Map<Long, T> map = new HashMap<>();
 
     List<T> findAll(){
         return new ArrayList<>(map.values());
@@ -17,8 +16,15 @@ public abstract class AbstractMapService<T, ID> {
         return map.get(id);
     }
 
-    T save(T object, ID id){
-        map.put(id, object);
+    T save(T object){
+
+        if(object != null){
+            if (object.getId() == null){
+                object.setId(getNextId());
+            }
+            map.put(object.getId(), object);
+        }
+        else throw new RuntimeException();
 
         return object;
     }
@@ -29,5 +35,19 @@ public abstract class AbstractMapService<T, ID> {
 
     void deleteById(ID id){
         map.remove(id);
+    }
+
+    private Long getNextId(){
+
+        long nextId = 0;
+
+        try {
+
+          nextId = Collections.max(map.keySet()) + 1;
+        }
+        catch (RuntimeException exception){
+            nextId = 1;
+        }
+        return nextId;
     }
 }
