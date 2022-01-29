@@ -3,10 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <title>Vets List</title>
+
+    <style>
+        table{
+            width:50%;
+            border-collapse: collapse;
+            border-style:solid;
+            font-style: normal;
+        }
+
+        tr:nth-child(even){
+            background-color: lightgray;
+        }
+
+        th{
+            background-color: gray;
+        }
+
+        .h1{
+            background-color: aquamarine;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        td{
+            text-align: center;
+        }
+
+    </style>
+
 </head>
 <body>
+<div class="h1">
     <h1 th:text=" 'Vets List Directory' ">vets index - list</h1>
 <hr>
+</div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>First name</th>
+                <th>Last name</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="tempVet : ${vets}">
+
+                <td th:text="${tempVet.id}"></td>
+                <td th:text="${tempVet.firstName}"></td>
+                <td th:text="${tempVet.lastName}"></td>
+
+            </tr>
+        </tbody>
+    </table>
+<br>
+
+    <a th:href="@{../}">Home Page</a>
 
 </body>
 </html>
