@@ -3,10 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <title>Owner List</title>
+
+    <style>
+            table{
+                width:50%;
+                border-collapse: collapse;
+                border-style:solid;
+                font-style: normal;
+            }
+
+            tr:nth-child(even){
+                background-color: lightgray;
+            }
+
+            th{
+                background-color: gray;
+            }
+
+            .h1{
+                background-color: aquamarine;
+                text-align: center;
+                margin-top: 10px;
+            }
+
+            td{
+                text-align: center;
+            }
+
+    </style>
+
 </head>
 <body>
-<h1 th:text=" 'Owner List Directory' ">owners list</h1>
+
+<div class="h1">
+<h1 th:text=" 'Owners Directory' ">owners list</h1>
 <hr>
+</div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>First name</th>
+                <th>Last name</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="tempOwner : ${owners}" >
+
+                <td th:text="${tempOwner.id}"></td>
+                <td th:text="${tempOwner.firstName}"></td>
+                <td th:text="${tempOwner.lastName}"></td>
+
+            </tr>
+        </tbody>
+    </table>
 
 </body>
 </html>
