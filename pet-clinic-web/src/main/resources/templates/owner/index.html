@@ -1,34 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                th:replace="~{fragments/layout :: layout (~{::body},'owners')}">
 <head>
     <meta charset="UTF-8">
     <title>Owner List</title>
 
     <style>
-            table{
-                width:50%;
-                border-collapse: collapse;
-                border-style:solid;
-                font-style: normal;
-            }
-
-            tr:nth-child(even){
-                background-color: lightgray;
-            }
-
-            th{
-                background-color: gray;
-            }
-
-            .h1{
-                background-color: aquamarine;
-                text-align: center;
-                margin-top: 10px;
-            }
-
-            td{
-                text-align: center;
-            }
 
     </style>
 
@@ -37,15 +14,14 @@
 
 <div class="h1">
 <h1 th:text=" 'Owners Directory' ">owners list</h1>
-<hr>
 </div>
 
-    <table>
+    <table id="owners" class="table table-striped" >
         <thead>
             <tr>
-                <th>Id</th>
-                <th>First name</th>
-                <th>Last name</th>
+                <th style="width: 150px;">Id</th>
+                <th style="width: 150px;">First name</th>
+                <th style="width: 150px;">Last name</th>
             </tr>
         </thead>
 
