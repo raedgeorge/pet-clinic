@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/owner")
+@RequestMapping("/owners")
 public class OwnerController {
 
     private final OwnerService ownerService;
@@ -20,13 +20,13 @@ public class OwnerController {
         this.ownerService = ownerService;
     }
 
-    @RequestMapping({"","/", "/index", "/index.html"})
+    @RequestMapping({"","/", "/index", "/index.html", "/find"})
     public String getOwnerList(Model model){
 
         List<Owner> ownerList = ownerService.findAll();
 
         model.addAttribute("owners", ownerList);
 
-        return "owner/index";
+        return "owners/index";
     }
 }
