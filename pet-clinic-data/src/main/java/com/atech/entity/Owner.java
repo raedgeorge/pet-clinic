@@ -1,5 +1,6 @@
 package com.atech.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Owner extends Person{
@@ -7,7 +8,7 @@ public class Owner extends Person{
     private String address;
     private String city;
     private String telephone;
-    private List<Pet> petList;
+    private List<Pet> petList = new ArrayList<>();
 
     public String getAddress() {
         return address;

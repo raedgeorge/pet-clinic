@@ -24,7 +24,9 @@ public abstract class AbstractMapService<T extends BaseEntity, ID extends Long> 
             }
             map.put(object.getId(), object);
         }
-        else throw new RuntimeException();
+        else {
+            throw new RuntimeException();
+        }
 
         return object;
     }
