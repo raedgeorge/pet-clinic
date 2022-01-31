@@ -8,6 +8,7 @@ import java.util.List;
 
 @Service
 public class SpecialityMapService extends AbstractMapService<Speciality, Long> implements SpecialityService {
+
     @Override
     public List<Speciality> findAll() {
         return super.findAll();
