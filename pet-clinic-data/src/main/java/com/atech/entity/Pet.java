@@ -2,6 +2,8 @@ package com.atech.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "pets")
@@ -23,6 +25,9 @@ public class Pet extends BaseEntity{
 
     @Column(name = "birth_date")
     private LocalDate birthDate;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pet")
+    private List<Visit> visits = new ArrayList<>();
 
     // Getters methods and Setters methods
     public PetType getPetType() {
@@ -55,7 +60,13 @@ public class Pet extends BaseEntity{
 
     public String getName() {
         return name;
+    }
 
+    public List<Visit> getVisits() {
+        return visits;
+    }
 
+    public void setVisits(List<Visit> visits) {
+        this.visits = visits;
     }
 }
