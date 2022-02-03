@@ -24,7 +24,7 @@ public class Pet extends BaseEntity{
     @Column(name = "birth_date")
     private LocalDate birthDate;
 
-    // Getters and Setters
+    // Getters methods and Setters methods
     public PetType getPetType() {
         return petType;
     }
