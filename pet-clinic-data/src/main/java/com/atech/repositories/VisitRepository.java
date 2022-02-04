@@ -3,5 +3,5 @@ package com.atech.repositories;
 import com.atech.entity.Visit;
 import org.springframework.data.repository.CrudRepository;
 
-public interface VisitRepository extends CrudRepository<Visit, Integer> {
+public interface VisitRepository extends CrudRepository<Visit, Long> {
 }
