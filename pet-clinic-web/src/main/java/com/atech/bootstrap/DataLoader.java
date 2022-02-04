@@ -1,10 +1,7 @@
 package com.atech.bootstrap;
 
 import com.atech.entity.*;
-import com.atech.service.OwnerService;
-import com.atech.service.PetTypeService;
-import com.atech.service.SpecialityService;
-import com.atech.service.VetService;
+import com.atech.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -18,17 +15,20 @@ public class DataLoader implements CommandLineRunner {
     private final OwnerService ownerService;
     private final PetTypeService petTypeService;
     private final SpecialityService specialityService;
+    private final VisitService visitService;
 
     @Autowired
     public DataLoader(VetService vetService,
                       OwnerService ownerService,
                       PetTypeService petTypeService,
-                      SpecialityService specialityService) {
+                      SpecialityService specialityService,
+                      VisitService visitService) {
 
         this.vetService = vetService;
         this.ownerService = ownerService;
         this.petTypeService = petTypeService;
         this.specialityService = specialityService;
+        this.visitService = visitService;
     }
 
     @Override
@@ -110,5 +110,15 @@ public class DataLoader implements CommandLineRunner {
 
         System.out.println("vets loaded");
         System.out.println("============");
+
+        Visit visit = new Visit();
+        visit.setDate(LocalDate.now());
+        visit.setDescription("visit for surgery appointment");
+        visit.setPet(raedPet);
+
+        visitService.save(visit);
+        System.out.println("visits loaded");
+        System.out.println("============");
+
     }
 }
