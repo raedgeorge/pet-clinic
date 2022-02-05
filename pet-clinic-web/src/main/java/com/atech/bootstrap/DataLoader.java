@@ -51,11 +51,11 @@ public class DataLoader implements CommandLineRunner {
         PetType savedCatPetType = petTypeService.save(cat);
 
         Owner owner1 = new Owner();
-        owner1.setFirstName("raed");
-        owner1.setLastName("abu sada");
-        owner1.setCity("Beit-Sahour");
-        owner1.setAddress("Steh Street");
-        owner1.setTelephone("0592756158");
+
+        Owner.builder().firstName("raed").lastName("abu sada")
+                       .address("Bethlehem Main Street")
+                       .city("Bethlehem").telephone("0592756158")
+                       .build();
 
         Pet raedPet = new Pet();
         raedPet.setName("raed dog");
