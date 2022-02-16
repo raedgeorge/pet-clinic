@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body},'owners')}">
+<head>
+    <meta charset="UTF-8">
+    <title>Owner Detail</title>
+
+    <style>
+
+    </style>
+
+</head>
+<body>
+
+<div class="container">
+    <h2 th:text=" 'Owner Information' "></h2>
+</div>
+
+<div class="container" style="background-color: white;border-radius: 10px;">
+
+    <div class="row" style="padding: 6px;">
+        <div class="col-md-1">
+            <label th:text=" 'Name: ' " >name</label>
+        </div>
+        <div class="col-md-10">
+            <label th:text="${owner.firstName}+' '+${owner.lastName}" ></label>
+        </div>
+    </div>
+</div>
+
+<div class="container" style="background-color: lightgray;border-radius: 15px;
+     margin-top: 10px">
+    <div class="row" style="padding: 6px;">
+        <div class="col-md-1">
+            <label th:text=" 'Address: ' " >address</label>
+        </div>
+        <div class="col-md-10">
+            <label th:text="${owner.address}"></label>
+        </div>
+    </div>
+</div>
+
+<div class="container" style="background-color: white;border-radius: 15px;
+     margin-top: 10px">
+    <div class="row" style="padding: 6px;">
+        <div class="col-md-1">
+            <label th:text=" 'City: ' " >city</label>
+        </div>
+        <div class="col-md-10">
+            <label th:text="${owner.city}"></label>
+        </div>
+    </div>
+</div>
+
+<div class="container" style="background-color: lightgray;border-radius: 15px;
+     margin-top: 10px">
+    <div class="row" style="padding: 6px;">
+        <div class="col-md-1">
+            <label th:text=" 'Telephone: ' " >telephone</label>
+        </div>
+        <div class="col-md-10">
+            <label th:text="${owner.telephone}"></label>
+        </div>
+    </div>
+</div>
+
+<div class="container" style="margin-top: 20px">
+
+    <a href="#"
+       th:href="@{'/owners/'+ ${owner.id}+ '/edit'}"
+       class="btn btn-info" style="background-color: black">Edit Owner</a>
+
+    <a href="#"
+       th:href="@{'/owners/'+ ${owner.id}+ '/edit'}"
+       class="btn btn-info" style="background-color: black">Add New Pet</a>
+</div>
+
+<div class="container" style="margin-top: 50px">
+    <h2 th:text="'Pets and Visits'">pets and visits</h2>
+</div>
+
+<div class="container" style="background-color: white">
+
+    <h6 th:each="tempPet : ${owner.petList}">
+
+    <div class="container">
+            <div class="row" style="padding: 6px;">
+                <div class="col-md-2">
+                    <label th:text=" 'Pet Name: ' " >pet name</label>
+                </div>
+                <div class="col-md-4">
+                    <label th:text="${tempPet.name}"></label>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2">
+                    <label th:text=" 'Birth Date: ' " >birth date</label>
+                </div>
+                <div class="col-md-4">
+                    <label th:text="${tempPet.birthDate}"></label>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row" style="padding: 6px;">
+                <div class="col-md-2">
+                    <label th:text=" 'Pet Type: ' " >pet type</label>
+                </div>
+                <div class="col-md-4">
+                    <label th:text="${tempPet.petType.name}"></label>
+                </div>
+            </div>
+        </div>
+
+        <label th:text=" 'Visit Date' "
+               style="margin-left: 700px; position: absolute; margin-top: -80px"
+        >visit date</label>
+
+        <label th:text=" 'Description' "
+               style="margin-left: 800px; position: absolute; margin-top: -80px"
+        >description</label>
+
+        <a href="#"
+           th:href="@{'/'}"
+           class="btn btn-link"
+           style="margin-left: 685px; position: absolute; margin-top: -30px
+           ;font-family: Consolas; font-weight: bold"
+           >Edit Pet</a>
+
+        <a href="#"
+           th:href="@{'/'}"
+           class="btn btn-link"
+           style="margin-left: 785px; position: absolute; margin-top: -30px
+           ;font-family: Consolas; font-weight: bold"
+           >Add Visit</a>
+
+    </h6>
+
+
+</div>
+
+</body>
+</html>

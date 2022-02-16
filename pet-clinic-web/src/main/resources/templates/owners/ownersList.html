@@ -22,6 +22,7 @@
                 <th style="width: 150px;">Id</th>
                 <th style="width: 150px;">First name</th>
                 <th style="width: 150px;">Last name</th>
+                <th style="width: 150px;">Action</th>
             </tr>
         </thead>
 
@@ -31,10 +32,26 @@
                 <td th:text="${tempOwner.id}"></td>
                 <td th:text="${tempOwner.firstName}"></td>
                 <td th:text="${tempOwner.lastName}"></td>
-
+                <td>
+                    <a href="#"
+                       th:href="@{'/owners/' + ${tempOwner.id}+ '/detail'}"
+                       class="btn btn-primary">Details</a>
+                </td>
             </tr>
         </tbody>
     </table>
+
+<form action="#" th:action="@{/owners/findOwner}"
+      th:object="${data}" method="post">
+
+    <hr>
+    <input type="text" name="data">
+
+    <br><br>
+
+    <input type="submit" value="Search" class="btn btn-info">
+
+</form>
 
 </body>
 </html>
