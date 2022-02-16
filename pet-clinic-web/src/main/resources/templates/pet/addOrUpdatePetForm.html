@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body},'owners')}">
+<head>
+    <meta charset="UTF-8">
+    <title>add pet</title>
+
+    <style>
+
+    </style>
+
+</head>
+<body>
+
+<form action="#"
+      th:action="@{'/owners/'+ ${owner.id} +'/savePet'}"
+      th:object="${pet}" method="post">
+
+    <div class="container" style="background-color: white; padding: 10px">
+
+        <label th:text=" 'Owner' " style="font-weight: bold;">owner</label>
+        <label th:text="${owner.firstName} +' '+${owner.lastName} "
+        style="margin-left: 45px; font-style: italic">name</label>
+
+        <div style="margin-top: 20px">
+            <label th:text=" 'Name' ">name</label>
+            <input type="text" th:field="*{name}" style="margin-left: 51px;
+                    width: 10cm;border-radius: 3px">
+        </div>
+
+        <div style="margin-top: 20px">
+            <label th:text=" 'Birth Date' ">birth date</label>
+            <input type="date" th:field="*{birthDate}" style="margin-left: 25px;
+                    width: 10cm;border-radius: 3px" placeholder="yyyy-mm-dd">
+        </div>
+
+
+
+        <div style="margin-top: 20px">
+            <label th:text="'Pet Type'">pet types</label>
+            <select th:field="*{petType}" style="margin-left: 34px">
+                <option th:each="temp : ${petTypes}"
+                        th:text="${temp.name}"
+                        th:value="${temp.name}"></option>
+
+            </select>
+        </div>
+
+        <div style="margin-top: 20px">
+            <button type="submit" class="btn btn-primary"
+                    style="width: 4cm; margin-left: 2.5cm" >Save</button>
+        </div>
+
+    </div>
+</form>
+</body>
+</html>

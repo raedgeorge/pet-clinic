@@ -3,6 +3,7 @@ package com.atech.controllers;
 import com.atech.entity.Owner;
 import com.atech.service.OwnerService;
 import com.atech.service.PetService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
+@Slf4j
 @Controller
 @RequestMapping("/owners")
 public class OwnerController {
@@ -112,7 +114,7 @@ public class OwnerController {
     @PostMapping("/saveOwner")
     public String saveOwner(@ModelAttribute("owner")Owner owner, @RequestParam("id")String id){
 
-        if (id == "") {
+        if (id.equals("")) {
             Owner savedOwner = ownerService.save(owner);
             return "redirect:/owners/"+ savedOwner.getId() + "/detail";
         }
@@ -125,13 +127,4 @@ public class OwnerController {
 
     }
 
-//    @PostMapping("/{ownerId}/saveUpdatedOwner")
-//    public String saveUpdatedOwner(
-//            @PathVariable("ownerId") long ownerId,
-//            @ModelAttribute("owner")Owner owner){
-//
-//        owner.setId(ownerId);
-//        ownerService.save(owner);
-//        return "redirect:/owners/" + ownerId + "/detail";
-//    }
 }
