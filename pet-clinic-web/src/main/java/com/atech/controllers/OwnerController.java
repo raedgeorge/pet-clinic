@@ -6,6 +6,10 @@ import com.atech.service.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -27,14 +31,44 @@ public class OwnerController {
         this.petService = petService;
     }
 
-    @RequestMapping({"","/", "/find", "/ownersList.html"})
-    public String getOwnerList(Model model){
+    @InitBinder
+    public void setAllowedFields(WebDataBinder dataBinder){
+        dataBinder.setDisallowedFields("id");
+    }
 
-        List<Owner> ownerList = ownerService.findAll();
+    @GetMapping("/find")
+    public String findOwners(Model model){
 
-        model.addAttribute("owners", ownerList);
+        model.addAttribute("owner", Owner.builder().build());
 
-        return "owners/ownersList";
+        return "owners/findOwners";
+    }
+
+    @GetMapping
+    public String getOwnerList(Owner owner, BindingResult bindingResult, Model model) {
+
+        if (owner.getLastName() == null) {
+            owner.setLastName("");
+        }
+
+        List<Owner> ownerList = ownerService.findAllByLastNameLike("%"+owner.getLastName()+"%");
+
+        if (ownerList.isEmpty()) {
+
+            bindingResult.rejectValue("lastName", "not found", "not found");
+
+        }
+
+        if (ownerList.size() == 1) {
+
+            owner = ownerList.iterator().next();
+            return "redirect:/owners/" + owner.getId() + "/detail";
+        }
+
+        else {
+            model.addAttribute("owners", ownerList);
+            return "owners/ownersList";
+        }
     }
 
     // owner detail. implementation 1
@@ -60,4 +94,5 @@ public class OwnerController {
 
         return modelAndView;
     }
+
 }

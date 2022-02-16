@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-                th:replace="~{fragments/layout :: layout (~{::body},'owners')}">
+      th:replace="~{fragments/layout :: layout (~{::body},'owners')}">
 <head>
     <meta charset="UTF-8">
     <title>Owner List</title>
@@ -40,18 +40,6 @@
             </tr>
         </tbody>
     </table>
-
-<form action="#" th:action="@{/owners/findOwner}"
-      th:object="${data}" method="post">
-
-    <hr>
-    <input type="text" name="data">
-
-    <br><br>
-
-    <input type="submit" value="Search" class="btn btn-info">
-
-</form>
 
 </body>
 </html>

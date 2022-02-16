@@ -55,4 +55,10 @@ public class OwnerJPAService implements OwnerService {
     public Owner findByLastName(String lastName) {
         return ownerRepository.findByLastName(lastName);
     }
+
+    @Override
+    public List<Owner> findAllByLastNameLike(String lastName) {
+
+        return ownerRepository.findAllByLastNameLike(lastName);
+    }
 }
