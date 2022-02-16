@@ -8,10 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -55,7 +52,8 @@ public class OwnerController {
 
         if (ownerList.isEmpty()) {
 
-            bindingResult.rejectValue("lastName", "not found", "not found");
+            bindingResult.rejectValue(
+                    "lastName", "not found", "not found");
 
         }
 
@@ -95,4 +93,45 @@ public class OwnerController {
         return modelAndView;
     }
 
+    @GetMapping("/addOwner")
+    public String addNewOwner(Model model){
+
+        model.addAttribute("owner", new Owner());
+        return "owners/createOrUpdateOwnerForm";
+    }
+
+    @GetMapping("/{ownerId}/updateOwner")
+    public String updateOwner(Model model, @PathVariable("ownerId") long ownerId){
+
+        Owner owner = ownerService.findById(ownerId);
+        model.addAttribute("owner", owner);
+
+        return "owners/createOrUpdateOwnerForm";
+    }
+
+    @PostMapping("/saveOwner")
+    public String saveOwner(@ModelAttribute("owner")Owner owner, @RequestParam("id")String id){
+
+        if (id == "") {
+            Owner savedOwner = ownerService.save(owner);
+            return "redirect:/owners/"+ savedOwner.getId() + "/detail";
+        }
+
+        else {
+            owner.setId(Long.parseLong(id));
+            Owner updatedOwner = ownerService.save(owner);
+            return "redirect:/owners/"+ updatedOwner.getId() + "/detail";
+        }
+
+    }
+
+//    @PostMapping("/{ownerId}/saveUpdatedOwner")
+//    public String saveUpdatedOwner(
+//            @PathVariable("ownerId") long ownerId,
+//            @ModelAttribute("owner")Owner owner){
+//
+//        owner.setId(ownerId);
+//        ownerService.save(owner);
+//        return "redirect:/owners/" + ownerId + "/detail";
+//    }
 }
