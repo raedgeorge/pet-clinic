@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -30,8 +31,15 @@ public class PetController {
         this.petTypeService = petTypeService;
     }
 
+    @InitBinder
+    public void initOwnerBinder(WebDataBinder dataBinder){
+        dataBinder.setDisallowedFields("id");
+    }
+
     @GetMapping("/addPet")
     public String initAddPetForm(@PathVariable long ownerId, Model model){
+
+
 
     model.addAttribute("owner", ownerService.findById(ownerId));
     model.addAttribute("pet", Pet.builder().build());
@@ -41,24 +49,48 @@ public class PetController {
 
     }
 
+    @GetMapping("/editPet/{petId}")
+    public String updatePet(@PathVariable long petId,
+                            @PathVariable long ownerId,
+                            Model model){
+
+        model.addAttribute("owner", ownerService.findById(ownerId));
+        model.addAttribute("petTypes", petTypeService.findAll());
+
+        model.addAttribute("pet", petService.findById(petId));
+
+        return "pet/addOrUpdatePetForm";
+    }
+
     @PostMapping("/savePet")
     public String savePet(@PathVariable long ownerId,
                           @ModelAttribute("pet")Pet pet,
                           @ModelAttribute("petType") PetType petType,
+                          @RequestParam("id") String id,
                           BindingResult bindingResult){
 
-//        if (bindingResult.hasErrors()){
-//            return "redirect:/owners/" + ownerId + "/detail";
-//        }
+        if (bindingResult.hasErrors()){
+            return "pet/addOrUpdatePetForm";
+        }
 
+        if (id.equals("")) {
         Pet savedPet = petService.save(pet);
         Owner owner = ownerService.findById(ownerId);
-
         savedPet.setOwner(owner);
-        savedPet.setPetType(pet.getPetType());
         owner.getPetList().add(savedPet);
         ownerService.save(owner);
-
         return "redirect:/owners/" + ownerId + "/detail";
+        }
+
+        else {
+            pet.setId(Long.parseLong(id));
+            Pet savedPet = petService.save(pet);
+            Owner owner = ownerService.findById(ownerId);
+            savedPet.setOwner(owner);
+            owner.getPetList().add(savedPet);
+            ownerService.save(owner);
+            return "redirect:/owners/" + ownerId + "/detail";
+        }
     }
+
 }

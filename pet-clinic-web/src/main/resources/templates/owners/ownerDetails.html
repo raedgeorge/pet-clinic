@@ -110,7 +110,7 @@
                     <label th:text=" 'Pet Type: ' " >pet type</label>
                 </div>
                 <div class="col-md-4">
-                    <label th:text="${tempPet.petType.name}"></label>
+                    <label th:text="${tempPet.petType.getPetTypeName}"></label>
                 </div>
             </div>
         </div>
@@ -124,7 +124,7 @@
         >description</label>
 
         <a href="#"
-           th:href="@{'/'}"
+           th:href="@{'/owners/'+${owner.id}+ '/editPet/'+${tempPet.id} }"
            class="btn btn-link"
            style="margin-left: 685px; position: absolute; margin-top: -30px
            ;font-family: Consolas; font-weight: bold"

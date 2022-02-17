@@ -18,6 +18,8 @@
 
     <div class="container" style="background-color: white; padding: 10px">
 
+        <input type="hidden" th:field="*{id}">
+
         <label th:text=" 'Owner' " style="font-weight: bold;">owner</label>
         <label th:text="${owner.firstName} +' '+${owner.lastName} "
         style="margin-left: 45px; font-style: italic">name</label>
@@ -40,15 +42,19 @@
             <label th:text="'Pet Type'">pet types</label>
             <select th:field="*{petType}" style="margin-left: 34px">
                 <option th:each="temp : ${petTypes}"
-                        th:text="${temp.name}"
-                        th:value="${temp.name}"></option>
+                        th:text="${temp.getPetTypeName}"
+                        th:value="${temp.getPetTypeName}"
+                        selected="selected"
+                ></option>
 
             </select>
         </div>
 
         <div style="margin-top: 20px">
             <button type="submit" class="btn btn-primary"
-                    style="width: 4cm; margin-left: 2.5cm" >Save</button>
+                    th:with="text=${pet['new']} ? 'Save Pet' : 'Update Pet' "
+                    th:text="${text}"
+                    style="width: 4cm; margin-left: 2.5cm" >Save Pet</button>
         </div>
 
     </div>

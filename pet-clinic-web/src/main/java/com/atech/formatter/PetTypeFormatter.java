@@ -2,6 +2,7 @@ package com.atech.formatter;
 
 import com.atech.entity.PetType;
 import com.atech.service.PetTypeService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.Formatter;
 import org.springframework.stereotype.Component;
 
@@ -10,6 +11,7 @@ import java.util.Collection;
 import java.util.Locale;
 
 @Component
+@Slf4j
 public class PetTypeFormatter implements Formatter<PetType> {
 
     private final PetTypeService petTypeService;
@@ -20,7 +22,7 @@ public class PetTypeFormatter implements Formatter<PetType> {
 
     @Override
     public String print(PetType petType, Locale locale) {
-        return petType.getName();
+        return petType.getPetTypeName();
     }
 
     @Override
@@ -28,7 +30,7 @@ public class PetTypeFormatter implements Formatter<PetType> {
         Collection<PetType> findPetTypes = petTypeService.findAll();
 
         for (PetType type : findPetTypes) {
-            if (type.getName().equals(text)) {
+            if (type.getPetTypeName().equals(text)) {
                 return type;
             }
         }

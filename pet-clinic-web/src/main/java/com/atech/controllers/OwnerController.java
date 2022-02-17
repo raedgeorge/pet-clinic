@@ -112,7 +112,9 @@ public class OwnerController {
     }
 
     @PostMapping("/saveOwner")
-    public String saveOwner(@ModelAttribute("owner")Owner owner, @RequestParam("id")String id){
+    public String saveOwner(
+            @ModelAttribute("owner")Owner owner,
+            @RequestParam("id")String id){
 
         if (id.equals("")) {
             Owner savedOwner = ownerService.save(owner);

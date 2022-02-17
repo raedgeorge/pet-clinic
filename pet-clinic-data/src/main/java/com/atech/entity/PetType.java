@@ -15,16 +15,16 @@ import javax.persistence.Table;
 public class PetType extends BaseEntity {
 
     @Column(name = "name")
-    private String name;
+    private String petTypeName;
 
     @Builder
-    public PetType(Long id, String name) {
+    public PetType(Long id, String petTypeName) {
         super(id);
-        this.name = name;
+        this.petTypeName = petTypeName;
     }
 
     @Override
     public String toString() {
-        return name;
+        return petTypeName;
     }
 }
