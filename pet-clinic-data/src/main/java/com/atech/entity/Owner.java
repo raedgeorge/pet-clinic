@@ -38,7 +38,9 @@ public class Owner extends Person{
         this.address = address;
         this.city = city;
         this.telephone = telephone;
-        this.petList = petList;
+        if (this.petList != null) {
+            this.petList = petList;
+        }
     }
 
     // Getters and Setters

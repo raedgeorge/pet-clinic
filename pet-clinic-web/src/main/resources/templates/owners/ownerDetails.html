@@ -79,70 +79,47 @@
     <h2 th:text="'Pets and Visits'">pets and visits</h2>
 </div>
 
-<div class="container" style="background-color: white">
 
-    <h6 th:each="tempPet : ${owner.petList}">
+<div class="container">
 
-    <div class="container">
-            <div class="row" style="padding: 6px;">
-                <div class="col-md-2">
-                    <label th:text=" 'Pet Name: ' " >pet name</label>
-                </div>
-                <div class="col-md-4">
-                    <label th:text="${tempPet.name}"></label>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-2">
-                    <label th:text=" 'Birth Date: ' " >birth date</label>
-                </div>
-                <div class="col-md-4">
-                    <label th:text="${tempPet.birthDate}"></label>
-                </div>
-            </div>
-        </div>
+    <table class="table" style="width: 100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Birth Date</th>
+                <th>Type</th>
+                <th>Action</th>
+                <th>Details</th>
+            </tr>
+        </thead>
 
-        <div class="container">
-            <div class="row" style="padding: 6px;">
-                <div class="col-md-2">
-                    <label th:text=" 'Pet Type: ' " >pet type</label>
-                </div>
-                <div class="col-md-4">
-                    <label th:text="${tempPet.petType.getPetTypeName}"></label>
-                </div>
-            </div>
-        </div>
+        <tbody>
+            <tr th:each="tempPet : ${owner.petList}">
+                <td th:text="${tempPet.name}"></td>
+                <td th:text="${tempPet.birthDate}"></td>
+                <td th:text="${tempPet.petType}"></td>
+                <td>
+                    <a href="#"
+                       th:href="@{'/owners/'+${owner.id}+ '/editPet/'+${tempPet.id} }"
+                       class="btn btn-link" style="font-family: Consolas; font-weight: bold"
+                    >Edit Pet</a>
+                </td>
 
-        <label th:text=" 'Visit Date' "
-               style="margin-left: 700px; position: absolute; margin-top: -80px"
-        >visit date</label>
+                <td>
+                    <a href="#"
+                       th:href="@{'/owners/'+ ${owner.id}+'/pets/'+${tempPet.id}+ '/addVisit'}"
+                       class="btn btn-link"
+                       style="font-family: Consolas; font-weight: bold"
+                       >Visits</a>
+                </td>
+            </tr>
+        </tbody>
 
-        <label th:text=" 'Description' "
-               style="margin-left: 800px; position: absolute; margin-top: -80px"
-        >description</label>
-
-        <a href="#"
-           th:href="@{'/owners/'+${owner.id}+ '/editPet/'+${tempPet.id} }"
-           class="btn btn-link"
-           style="margin-left: 685px; position: absolute; margin-top: -30px
-           ;font-family: Consolas; font-weight: bold"
-           >Edit Pet</a>
-
-        <a href="#"
-           th:href="@{../}"
-           class="btn btn-link"
-           style="margin-left: 785px; position: absolute; margin-top: -30px
-           ;font-family: Consolas; font-weight: bold"
-           >Add Visit</a>
-
-        <hr style="margin-top: 10px">
-
-    </h6>
-
+    </table>
 
 </div>
+
+
 
 </body>
 </html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body},'owners')}">
+<head>
+    <meta charset="UTF-8">
+    <title>visit</title>
+
+    <style>
+
+    </style>
+
+</head>
+<body>
+<div class="container">
+
+    <h2 th:text="'New Visit'">new visit</h2>
+    <label th:text="'Pet'">pet</label>
+    <div class="table">
+
+        <table style="width: 80%">
+            <thead style="height: 1cm;">
+                <tr style="background-color: black; color: #eeeeee; padding: 4px">
+                    <th style="padding: 4px">Name</th>
+                    <th>Birth Date</th>
+                    <th>Type</th>
+                    <th>Owner</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            <div style="margin-top: 5px">
+                <tr>
+                   <td th:text="${pet.name}"></td>
+                   <td th:text="${pet.birthDate}"></td>
+                   <td th:text="${pet.petType}"></td>
+                   <td th:text="${owner.firstName}+' '+${owner.lastName}"></td>
+                </tr>
+            </div>
+            </tbody>
+
+        </table>
+    </div>
+
+    <div class="container" style="margin-top: 15px">
+        <form action="#"
+              th:action="@{'/owners/'+${owner.id}+'/pets/'+${pet.id}+'/saveVisit'}"
+              th:object="${visit}"
+              method="post">
+
+            <input type="hidden" th:field="*{id}">
+
+        <div style="margin-top: 10px">
+            <label th:text="'Date'" >date</label>
+            <input type="date" th:field="*{date}" class="input" style="width: 20cm;
+                   margin-left: 2.2cm; border-radius: 3px">
+        </div>
+
+            <div style="margin-top: 10px">
+                <label th:text="'Description'" >description</label>
+                <input type="text" th:field="*{description}" class="input" style="width: 20cm;
+                       margin-left: 1cm; border-radius: 3px">
+            </div>
+
+            <button type="submit" class="btn btn-primary"
+                    style="margin-top: 20px; margin-left: 120px;
+                    width: 3cm; background-color: #34302d; border-color: green; border-style: solid"
+            th:with="text=${visit['new']} ? 'Add Visit' : 'Update Visit'"
+            th:text="${text}"
+            >Add Visit</button>
+        </form>
+    </div>
+
+    <div class="container" style="margin-top: 40px">
+        <label th:text="'Registered Visits'">previous visits</label>
+
+        <table class="table" style="width: 80%;">
+            <thead class="table-header">
+                <tr>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr th:each="tempPetVisit: ${pet.getVisits()}">
+                    <td th:text="${tempPetVisit.date}"></td>
+                    <td th:text="${tempPetVisit.description}"></td>
+                    <td>
+                        <a href="#" style="color: red; font-weight: bold"
+                           th:href="@{'/pets/'+ ${pet.id}+'/deleteVisit/'+${tempPetVisit.id}}"
+                           >Delete</a> |
+
+                        <a href="#" style="font-weight: bold"
+               th:href="@{'/owners/'+${owner.id}+'/pets/'+${pet.id}+'/updateVisit/'+${tempPetVisit.id}}"
+                           >Update</a>
+
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+
+</body>
+</html>
