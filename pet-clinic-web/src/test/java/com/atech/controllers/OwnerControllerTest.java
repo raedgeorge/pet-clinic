@@ -13,9 +13,12 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -67,4 +70,47 @@ class OwnerControllerTest {
       //  verifyNoInteractions(ownerService);
 
     }
+
+    @Test
+    void processFindFormEmptyReturnMany() throws Exception{
+
+        when(ownerService.findAllByLastNameLike(anyString())).
+                thenReturn(Arrays.asList(Owner.builder().id(1l).build(),
+                           Owner.builder().id(2l).build()));
+
+        mockMvc.perform(get("/owners").
+                param("lastName",""))
+                .andExpect(status().isOk())
+                .andExpect(view().name("owners/ownersList"))
+                .andExpect(model().attribute("owners", hasSize(2)));
+
+    }
+
+    @Test
+    void processFindFormReturnMany() throws Exception{
+
+        when(ownerService.findAllByLastNameLike(anyString())).
+                thenReturn(Arrays.asList(Owner.builder().id(1l).build(),
+                        Owner.builder().id(2l).build()));
+
+        mockMvc.perform(get("/owners"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("owners/ownersList"))
+                .andExpect(model().attribute("owners", hasSize(2)));
+
+    }
+
+    @Test
+    void processFindFormReturnOne() throws Exception{
+
+        when(ownerService.findAllByLastNameLike(anyString()))
+                .thenReturn(Arrays.asList(Owner.builder().id(1L).build()));
+
+        mockMvc.perform(get("/owners"))
+        .andExpect(status().is3xxRedirection())
+        .andExpect(view().name("redirect:/owners/1/detail"));
+
+
+    }
+
 }
