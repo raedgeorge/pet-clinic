@@ -7,7 +7,11 @@ import com.atech.service.VisitService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+
+import java.beans.PropertyEditorSupport;
+import java.time.LocalDate;
 
 @Controller
 @Slf4j
@@ -19,6 +23,18 @@ public class VisitController {
     public VisitController(VisitService visitService, PetService petService) {
         this.visitService = visitService;
         this.petService = petService;
+    }
+
+    @InitBinder
+    public void dataBinder(WebDataBinder webDataBinder){
+        webDataBinder.setDisallowedFields("id");
+
+        webDataBinder.registerCustomEditor(LocalDate.class, new PropertyEditorSupport(){
+            @Override
+            public void setAsText(String text) throws IllegalArgumentException{
+                setValue(LocalDate.parse(text));
+            }
+        });
     }
 
     @GetMapping("/owners/{ownerId}/pets/{petId}/addVisit")
