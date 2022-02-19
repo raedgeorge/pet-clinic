@@ -11,25 +11,28 @@
 </head>
 <body>
 <div>
-    <h2 th:text=" 'Vets List Directory' ">vets index - list</h2>
+    <h2 th:text=" 'Vets List' ">vets index - list</h2>
 <hr>
 </div>
 
     <table  id="vets" class="table table-striped">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>First name</th>
-                <th>Last name</th>
+                <th>Name</th>
+                <th>Specialities</th>
             </tr>
         </thead>
 
         <tbody>
             <tr th:each="tempVet : ${vets}">
+                <td th:text="${tempVet.firstName}+' '+${tempVet.lastName}"></td>
+                <td>
+                    <span th:each="speciality:${tempVet.specialities}"
+                          th:text="${speciality.description} +' ' "></span>
 
-                <td th:text="${tempVet.id}"></td>
-                <td th:text="${tempVet.firstName}"></td>
-                <td th:text="${tempVet.lastName}"></td>
+                    <span th:if="${tempVet?.specialities?.size() ==0}">none</span>
+                </td>
+
 
             </tr>
         </tbody>
