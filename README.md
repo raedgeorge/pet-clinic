@@ -1,2 +1,2 @@
 # pet-clinic
-delivered through the course spring frame work guru 
+developed through the course spring frame work guru 
